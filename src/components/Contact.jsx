@@ -31,7 +31,7 @@ const VideoPlayer = () => {
       onStop={() => setIsDragging(false)}
     >
       <div
-        className={`fixed bottom-4 right-4 z-50 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`fixed bottom-4 right-4 z-100000000 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       >
         {isMinimized ? (
           <div
