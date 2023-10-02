@@ -1,136 +1,98 @@
-import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
+import React, { useState } from 'react';
+import Draggable from 'react-draggable';
+import ReactPlayer from 'react-player/youtube';
 
-import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
-import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+const VideoPlayer = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
 
-const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const toggleDescription = () => {
+    setIsFlipped(!isFlipped);
+  };
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "JavaScript Mastery",
-          from_email: form.email,
-          to_email: "sujata@jsmastery.pro",
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+  const minimizePlayer = () => {
+    setIsMinimized(true);
+  };
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
-          alert("Ahh, something went wrong. Please try again.");
-        }
-      );
+  const restorePlayer = () => {
+    setIsMinimized(false);
   };
 
   return (
-    <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
+    <Draggable
+      axis="both"
+      handle=".handle"
+      onDrag={() => setIsDragging(true)}
+      onStop={() => setIsDragging(false)}
     >
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+      <div
+        className={`fixed bottom-4 right-4 z-50 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
-
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8'
-        >
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Name</span>
-            <input
-              type='text'
-              name='name'
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your good name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your email</span>
-            <input
-              type='email'
-              name='email'
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your web address?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Message</span>
-            <textarea
-              rows={7}
-              name='message'
-              value={form.message}
-              onChange={handleChange}
-              placeholder='What you want to say?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-
-          <button
-            type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+        {isMinimized ? (
+          <div
+            className="w-24 h-24 bg-blue-500 text-white flex justify-center items-center rounded-full cursor-pointer"
+            onClick={restorePlayer}
           >
-            {loading ? "Sending..." : "Send"}
-          </button>
-        </form>
-      </motion.div>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        ) : (
+          <div
+            className={`w-96 ${isFlipped ? 'h-auto' : 'h-96'} bg-transparent rounded-lg overflow-hidden transition-transform`}
+          >
+            <div
+              className={`w-full h-full ${isFlipped ? 'hidden' : 'block'}`}
+              style={{
+                position: 'relative',
+                width: '100%',
+                paddingBottom: '56.25%',
+                background: 'white',
+                border: '2px solid white',
+              }}
+            >
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=jpXSfikcOKs"
+                width="100%"
+                height="300px"
+                controls
+              />
+              <button
+                className="absolute bottom-1 left-4 bg-blue-500 text-white py-2 px-4 rounded-lg"
+                onClick={toggleDescription}
+              >
+              Afficher la Description de la Vidéo
+              </button>
+              <button
+                className="absolute top-1 right-1 bg-blue-500 text-white py-1 px-2 rounded-lg"
+                onClick={minimizePlayer}
+              >
+                Minimize
+              </button>
+            </div>
 
-      <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
-      >
-        <EarthCanvas />
-      </motion.div>
-    </div>
+            <div
+              className={`p-4 bg-white ${isFlipped ? 'block' : 'hidden'}`}
+            >
+              <h2 className="text-xl font-bold text-black">La Pornographie chez les Adolescents </h2>
+              <p className="text-gray-700">
+                La présence de troubles post-traumatiques est inutile car les images auxquelles ils sont exposés n'ont aucun sens pour eux et leur donnent une fausse représentation de la sexualité, créant ainsi une réalité déconnectée de ce que sont réellement les femmes et les hommes. Cette distorsion génère des tensions dans les relations et dégrade leur interrelation, avec une croyance répandue de supériorité, généralement du côté des hommes. Par ailleurs, de nombreux parents estiment que l'école dispense des informations inappropriées, en particulier en matière d'islam et de catholicisme romain, ce qui les amène à exclure leurs enfants de ces parties du programme. Toutefois, il est important de leur permettre de trouver quelqu'un à qui parler lorsqu'ils ont des questions nécessitant des réponses.
+              </p>
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4"
+                onClick={toggleDescription}
+              >
+                Go to Video
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </Draggable>
   );
 };
 
-export default SectionWrapper(Contact, "contact");
+export default VideoPlayer;

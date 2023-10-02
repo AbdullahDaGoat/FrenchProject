@@ -24,7 +24,7 @@ const ServiceCard = ({ index, title, icon }) => (
         <img
           src={icon}
           alt='web-development'
-          className='w-16 h-16 object-contain'
+          className='w-25 h-25 object-contain'
         />
 
         <h3 className='text-white text-[20px] font-bold text-center'>
@@ -39,19 +39,15 @@ const About = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
+        <p className={styles.sectionSubText}>Table des Matières</p>
+        <h2 className={styles.sectionHeadText}>Introduction</h2>
       </motion.div>
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        I'm a skilled software developer with experience in TypeScript and
-        JavaScript, and expertise in frameworks like React, Node.js, and
-        Three.js. I'm a quick learner and collaborate closely with clients to
-        create efficient, scalable, and user-friendly solutions that solve
-        real-world problems. Let's work together to bring your ideas to life!
+        À l’ère numérique d’aujourd’hui, les adolescents ont accès à un large éventail de contenus, y compris la pornographie, et ses effets sur les individus font l’objet d’un débat considérable. Ce site Web vise à fournir des informations précises sur les effets de la pornographie sur les adolescents, en explorant les conséquences positives et négatives. Les conclusions et les publications seront reprises sur les réseaux sociaux ci-dessous, dont nous discuterons plus en détail. De cette façon, nous pouvons mieux comprendre les questions complexes entourant le rôle de la pornographie dans la vie des adolescents et sa prévalence dans la société contemporaine.
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>

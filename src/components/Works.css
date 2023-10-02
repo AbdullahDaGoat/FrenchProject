@@ -1,0 +1,8 @@
+.hidden {
+  display: none;
+}
+
+.moveToMiddle {
+  margin-left: auto;
+  margin-right: auto;
+}
