@@ -42,7 +42,7 @@ const Navbar = () => {
           onClick={() => window.scrollTo(0, 0)}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain hover:text-red-600" />
-          <a href="https://docs.google.com/document/d/1MUICuQdFEHN857ar5Mx31rVWhGHEgwJu-wcVmCxgrj8/edit" className="text-white text-[18px] font-bold cursor-pointer">
+          <a href="https://docs.google.com/document/d/1MUICuQdFEHN857ar5Mx31rVWhGHEgwJu-wcVmCxgrj8/edit" className="text-white text-[18px] font-bold cursor-pointer transition 0.3-all duration-300 hover:underline">
             Abdullah Khan | Classe de Français 2023
           </a>
         </Link>
@@ -125,7 +125,8 @@ const Navbar = () => {
           </ol>
           <br/>
           <br/>
-<p className="pl-10 text-xl font-bold text-center">Veuillez noter que pour les articles restants, les mots étaient soit simples, soit répétés à partir des articles ci-dessus ou auto-explicatifs / compréhensibles.</p>          <button
+<p className="pl-10 text-xl font-bold text-center">
+  Veuillez noter que pour les articles restants, les mots étaient soit simples, soit répétés à partir des articles ci-dessus ou auto-explicatifs / compréhensibles.</p>          <button
             onClick={toggleVocabulary}
             className="bg-transparent text-white border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 block mx-auto mt-8"
           >

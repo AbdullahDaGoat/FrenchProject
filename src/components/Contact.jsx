@@ -31,11 +31,11 @@ const VideoPlayer = () => {
       onStop={() => setIsDragging(false)}
     >
       <div
-        className={`fixed bottom-4 right-4 z-50 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`fixed bottom-4 right-4 z-100000000 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       >
         {isMinimized ? (
           <div
-            className="w-24 h-24 bg-blue-500 text-white flex justify-center items-center rounded-full cursor-pointer"
+            className="w-24 h-24 bg-blue-500 hover:bg-blue-400 hover:scale-125 text-white flex justify-center items-center rounded-full cursor-pointer "
             onClick={restorePlayer}
           >
             <i class="fa-solid fa-plus"></i>
@@ -61,7 +61,7 @@ const VideoPlayer = () => {
                 controls
               />
               <button
-                className="absolute bottom-1 left-4 bg-blue-500 text-white py-2 px-4 rounded-lg"
+                className="absolute bottom-1 left-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:scale-10"
                 onClick={toggleDescription}
               >
               Afficher la Description de la Vidéo
@@ -75,18 +75,20 @@ const VideoPlayer = () => {
             </div>
 
             <div
-              className={`p-4 bg-white ${isFlipped ? 'block' : 'hidden'}`}
+              className={`p-4 bg-white overflow-y-scroll h-80 ${isFlipped ? 'block' : 'hidden'}`}
             >
               <h2 className="text-xl font-bold text-black">La Pornographie chez les Adolescents </h2>
               <p className="text-gray-700">
                 La présence de troubles post-traumatiques est inutile car les images auxquelles ils sont exposés n'ont aucun sens pour eux et leur donnent une fausse représentation de la sexualité, créant ainsi une réalité déconnectée de ce que sont réellement les femmes et les hommes. Cette distorsion génère des tensions dans les relations et dégrade leur interrelation, avec une croyance répandue de supériorité, généralement du côté des hommes. Par ailleurs, de nombreux parents estiment que l'école dispense des informations inappropriées, en particulier en matière d'islam et de catholicisme romain, ce qui les amène à exclure leurs enfants de ces parties du programme. Toutefois, il est important de leur permettre de trouver quelqu'un à qui parler lorsqu'ils ont des questions nécessitant des réponses.
               </p>
+    <div className="text-center">
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4"
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:scale-125 text-center"
                 onClick={toggleDescription}
               >
-                Go to Video
+                Retourner au Vidéo
               </button>
+              </div>
             </div>
           </div>
         )}
