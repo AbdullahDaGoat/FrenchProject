@@ -222,7 +222,7 @@ const ArticleCard = ({ article, isExpanded, setExpandedArticleId }) => {
           scale: 1,
           speed: 450,
         }}
-        className="bg-tertiary hover:bg-quadry transition 0.5-all p-5 rounded-2xl sm:w-[360px] w-full"
+        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
       >
         <div>
           <img src={previewImage} alt={title} className="mb-4" />
